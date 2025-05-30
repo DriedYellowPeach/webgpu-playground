@@ -32,8 +32,8 @@ const pipeline = device.createRenderPipeline({
 });
 
 // Upload canvas resolution as uniform
-canvas.width = 1024;
-canvas.height = 768;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 const resData = new Float32Array([canvas.width, canvas.height]);
 const resBuffer = device.createBuffer({
   size: resData.byteLength,
