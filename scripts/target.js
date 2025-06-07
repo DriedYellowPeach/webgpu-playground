@@ -9,7 +9,7 @@ context.configure({
   format,
 });
 
-const shader = await loadWGSLShader("shader/circle.wgsl");
+const shader = await loadWGSLShader("shaders/circle.wgsl");
 
 const module = device.createShaderModule({
   label: "circle shader",
@@ -84,6 +84,24 @@ function draw(timestamp) {
 
   device.queue.submit([encoder.finish()]);
 
+  // const observer = new ResizeObserver((entries) => {
+  //   for (const entry of entries) {
+  //     const canvas = entry.target;
+  //     const width = entry.contentBoxSize[0].inlineSize;
+  //     const height = entry.contentBoxSize[0].blockSize;
+  //     canvas.width = Math.max(
+  //       1,
+  //       Math.min(width, device.limits.maxTextureDimension2D),
+  //     );
+  //     canvas.height = Math.max(
+  //       1,
+  //       Math.min(height, device.limits.maxTextureDimension2D),
+  //     );
+  //   }
+  //   render();
+  // });
+  // observer.observe(canvas);
+
   requestAnimationFrame(draw);
 }
 
@@ -91,5 +109,23 @@ async function loadWGSLShader(path) {
   const response = await fetch(path);
   return await response.text();
 }
+// TODO: need rework
+// const observer = new ResizeObserver((entries) => {
+//   for (const entry of entries) {
+//     const canvas = entry.target;
+//     const width = entry.contentBoxSize[0].inlineSize;
+//     const height = entry.contentBoxSize[0].blockSize;
+//     canvas.width = Math.max(
+//       1,
+//       Math.min(width, device.limits.maxTextureDimension2D),
+//     );
+//     canvas.height = Math.max(
+//       1,
+//       Math.min(height, device.limits.maxTextureDimension2D),
+//     );
+//   }
+//   requestAnimationFrame(draw);
+// });
+// observer.observe(canvas);
 
 requestAnimationFrame(draw);
